@@ -114,6 +114,32 @@ services:
     depends_on:
       - database
 
+  admin-service:
+    #image: danijelradakovic/kitchen-service
+    image: admin-service
+    build:
+      context: ../Nistagram-admin-service
+      dockerfile: Dockerfile
+      args:
+        STAGE: ${STAGE:-dev}
+    restart: on-failure
+    networks:
+      - servers
+    ports:
+      - 9004:8080
+    environment:
+      USER_SERVICE_DOMAIN: ${USER_SERVICE_DOMAIN}
+      USER_SERVICE_PORT: ${USER_SERVICE_PORT}
+
+      POST_SERVICE_DOMAIN: ${POST_SERVICE_DOMAIN}
+      POST_SERVICE_PORT: ${POST_SERVICE_PORT}
+
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_DOMAIN: ${DATABASE_DOMAIN}
+      DATABASE_SCHEMA: ${DATABASE_SCHEMA_ADMIN}
+    depends_on:
+      - database
 
   database:
     image: mysql:${MYSQL_VERSION:-8.0.19}

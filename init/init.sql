@@ -10,6 +10,9 @@ GRANT ALL ON `post_db`.* TO 'sa'@'%';
 CREATE DATABASE IF NOT EXISTS `agent_db`;
 GRANT ALL ON `agent_db`.* TO 'sa'@'%';
 
+CREATE DATABASE IF NOT EXISTS `admin_db`;
+GRANT ALL ON `admin_db`.* TO 'sa'@'%';
+
 /*
 User authority nad admin
 INSERT INTO `auth_db`.`authority` (`id`, `name`) VALUES ('1', 'USER');
