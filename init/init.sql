@@ -4,6 +4,9 @@ GRANT ALL ON `auth_db`.* TO 'sa'@'%';
 CREATE DATABASE IF NOT EXISTS `user_db`;
 GRANT ALL ON `user_db`.* TO 'sa'@'%';
 
+CREATE DATABASE IF NOT EXISTS `post_db`;
+GRANT ALL ON `post_db`.* TO 'sa'@'%';
+
 /*
 User authority nad admin
 INSERT INTO `auth_db`.`authority` (`id`, `name`) VALUES ('1', 'USER');
