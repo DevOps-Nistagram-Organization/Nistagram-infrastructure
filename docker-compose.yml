@@ -86,35 +86,33 @@ services:
       DATABASE_SCHEMA: ${DATABASE_SCHEMA_POST}
     depends_on:
       - database
-#  report-service:
-#    #image: danijelradakovic/order-service
-#    image: report-service
-#    build:
-#      context: ./AgentReportService
-#      dockerfile: Dockerfile
-#      args:
-#        STAGE: ${STAGE:-dev}
-#    restart: on-failure
-#    networks:
-#      - servers
-#    ports:
-#      - 9001:8080
-#    environment:
-#      PRODUCT_SERVICE_DOMAIN: ${PRODUCT_SERVICE_DOMAIN}
-#      PRODUCT_SERVICE_PORT: ${PRODUCT_SERVICE_PORT}
-#      SHOP_SERVICE_DOMAIN: ${SHOP_SERVICE_DOMAIN}
-#      SHOP_SERVICE_PORT: ${SHOP_SERVICE_PORT}
-#
-#      DATABASE_USERNAME: ${DATABASE_USERNAME}
-#      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-#      DATABASE_DOMAIN: ${DATABASE_DOMAIN}
-#      DATABASE_SCHEMA: ${DATABASE_SCHEMA}
-#    depends_on:
-#        - database
 
+  agent-service:
+    #image: danijelradakovic/kitchen-service
+    image: agent-service
+    build:
+      context: ../nistagram-agent-service
+      dockerfile: Dockerfile
+      args:
+        STAGE: ${STAGE:-dev}
+    restart: on-failure
+    networks:
+      - servers
+    ports:
+      - 9003:8080
+    environment:
+      USER_SERVICE_DOMAIN: ${USER_SERVICE_DOMAIN}
+      USER_SERVICE_PORT: ${USER_SERVICE_PORT}
 
+      POST_SERVICE_DOMAIN: ${POST_SERVICE_DOMAIN}
+      POST_SERVICE_PORT: ${POST_SERVICE_PORT}
 
-
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_DOMAIN: ${DATABASE_DOMAIN}
+      DATABASE_SCHEMA: ${DATABASE_SCHEMA_AGENT}
+    depends_on:
+      - database
 
 
   database:
